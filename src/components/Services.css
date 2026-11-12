@@ -136,13 +136,38 @@
   }
 }
 
+
 @media (max-width: 550px) {
   .services {
     padding: 75px 20px;
   }
 
   .services-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 16px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    margin-right: -20px;
+    padding-right: 20px;
+    padding-bottom: 12px;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .services-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .service-card {
+    flex: 0 0 85%;
+    min-width: 0;
+    scroll-snap-align: start;
   }
 
   .service-image {
@@ -151,5 +176,7 @@
 
   .services-bottom {
     flex-direction: column;
+    text-align: center;
   }
 }
+
