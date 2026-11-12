@@ -52,3 +52,26 @@ p { text-wrap: pretty; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  background-color: var(--ink-deep);
+}
+
+body {
+  min-height: 100vh;
+}
+
+html {
+  background-color: var(--ink-deep);
+  overscroll-behavior-y: none;
+}
+
+body {
+  background-color: var(--ink-deep);
+  overscroll-behavior-y: none;
+}
