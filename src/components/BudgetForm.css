@@ -1,0 +1,158 @@
+
+.budget-form {
+  background: #ffffff;
+  padding: 100px 24px;
+}
+
+.budget-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 80px;
+}
+
+.budget-info h2 {
+  color: var(--ink);
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.2;
+  margin: 20px 0;
+}
+
+.budget-info h2 span {
+  color: var(--brand);
+}
+
+.budget-info > p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+.budget-contact {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 35px;
+  color: var(--brand);
+}
+
+.budget-contact div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.budget-contact strong {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.budget-contact span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.budget-card {
+  display: flex;
+  flex-direction: column;
+  padding: 38px;
+  background: var(--mist);
+  border: 1px solid #e8eef0;
+  border-radius: 10px;
+}
+
+.budget-card h3 {
+  color: var(--ink);
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+
+.budget-card > p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.budget-card label {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+.budget-card input,
+.budget-card select,
+.budget-card textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #dce6e9;
+  border-radius: 5px;
+  background: #ffffff;
+  color: var(--ink);
+  outline: none;
+  font-size: 14px;
+}
+
+.budget-card input:focus,
+.budget-card select:focus,
+.budget-card textarea:focus {
+  border-color: var(--brand);
+}
+
+.budget-card textarea {
+  resize: vertical;
+}
+
+.budget-card button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border: none;
+  border-radius: 5px;
+  background: var(--brand);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color .2s, color .2s, transform .2s, border-color .2s;
+}
+
+.budget-card button:hover {
+  background: var(--ink);
+}
+
+.budget-disclaimer {
+  margin-top: 15px;
+  color: #82939a;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .budget-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 550px) {
+  .budget-form {
+    padding: 75px 20px;
+  }
+
+  .budget-card {
+    padding: 25px 20px;
+  }
+}
+
+.budget-card input:focus-visible,
+.budget-card select:focus-visible,
+.budget-card textarea:focus-visible { outline: 3px solid var(--aqua); outline-offset: 1px; }
+.budget-card button { min-height: 52px; }
+.budget-card button:hover { background: var(--ink); }

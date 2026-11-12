@@ -1,0 +1,265 @@
+/* Camada visual: vidro, luz e movimento. Carregada depois dos CSS dos componentes. */
+
+/* Entrada orquestrada do hero (uma única vez ao carregar) */
+.hero-content > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero-content > :nth-child(2) { animation-delay: .08s; } .hero-content > :nth-child(3) { animation-delay: .16s; }
+.hero-content > :nth-child(4) { animation-delay: .24s; } .hero-content > :nth-child(5) { animation-delay: .32s; }
+.hero-image { animation: rise 1s cubic-bezier(.2,.7,.2,1) .15s both; }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+/* Botões: gradiente e brilho ao passar o mouse */
+.hero-button, .header-button, .footer-cta, .budget-card button {
+  background: linear-gradient(135deg, #12a3bf, var(--brand-dark)); position: relative; overflow: hidden; isolation: isolate;
+  box-shadow: 0 8px 22px rgba(15,138,163,.35);
+}
+.hero-button::after, .header-button::after, .footer-cta::after, .budget-card button::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; transform: translateX(-120%) skewX(-20deg);
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transition: transform .6s;
+}
+.hero-button:hover::after, .header-button:hover::after, .footer-cta:hover::after, .budget-card button:hover::after { transform: translateX(120%) skewX(-20deg); }
+.hero-button:hover, .header-button:hover, .footer-cta:hover, .budget-card button:hover { background: linear-gradient(135deg, #12a3bf, var(--brand-dark)); }
+
+/* Serviços: borda de vidro e zoom na foto */
+.services { background: linear-gradient(180deg, var(--mist), #fff); }
+.section-tag { color: var(--brand); }
+.service-card { border-radius: 12px; border: 1px solid var(--line); }
+.service-card:hover { transform: translateY(-4px); border-color: var(--aqua); box-shadow: 0 18px 40px rgba(7,30,41,.14); }
+.service-image { position: relative; }
+.service-image::after { content: ""; position: absolute; inset: auto 0 0 0; height: 3px; background: linear-gradient(90deg, var(--brass), transparent); }
+
+/* Galeria */
+.gallery-card { border-radius: 12px; }
+.gallery-card-overlay span { color: var(--brass); }
+.gallery-card-overlay { background: linear-gradient(transparent 30%, rgba(4,20,28,.9)); }
+.gallery-filters button.active { box-shadow: 0 6px 16px rgba(7,30,41,.25); }
+
+/* Diferenciais: fundo escuro com luz */
+.why-us {
+  background:
+    radial-gradient(50% 60% at 15% 0%, rgba(92,208,227,.16), transparent 70%),
+    radial-gradient(40% 50% at 100% 100%, rgba(201,151,91,.12), transparent 70%), var(--ink);
+}
+.benefit-card { border-radius: 12px; background: rgba(255,255,255,.04); backdrop-filter: blur(6px); border-color: rgba(255,255,255,.14); min-height: 230px; }
+.benefit-card:hover { border-color: rgba(201,151,91,.6); }
+.benefit-icon { color: var(--brass); background: rgba(201,151,91,.14); }
+
+/* Orçamento */
+.budget-card { border-radius: 14px; background: linear-gradient(160deg, #fff, var(--mist)); box-shadow: 0 24px 60px rgba(7,30,41,.12); border-color: var(--line); }
+.budget-contact { color: var(--brass); }
+
+/* Rodapé */
+.footer { background: var(--ink-deep); border-top: 3px solid var(--brass); }
+.floating-whatsapp::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; z-index: -1; animation: ping 3s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: .5; } 70%, 100% { transform: scale(1.7); opacity: 0; } }
+
+/* Entrada dos cards ao rolar */
+.js .service-card, .js .benefit-card, .js .budget-card { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .25s, border-color .25s; }
+.js .in { opacity: 1; transform: none; }
+.js .service-card:nth-child(2), .js .benefit-card:nth-child(2) { transition-delay: .08s; }
+.js .service-card:nth-child(3), .js .benefit-card:nth-child(3) { transition-delay: .16s; }
+.js .service-card:nth-child(4), .js .benefit-card:nth-child(4) { transition-delay: .24s; }
+.js .service-card.in:hover { transform: translateY(-4px); transition-delay: 0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .service-card, .js .benefit-card, .js .budget-card { opacity: 1; transform: none; }
+  .hero-content > *, .hero-image, .dimension { animation: none !important; }
+}
+
+/* ===== Feixe de luz passando pelas letras coloridas ===== */
+.hero h1 span, .services-heading h2 span, .gallery-heading h2 span,
+.why-us-heading h2 span, .budget-info h2 span, .process-heading h2 span, .faq-heading h2 span {
+  --beam-base: var(--aqua);
+  --beam-hi: #fff;
+  color: var(--beam-base);
+  background: linear-gradient(100deg, var(--beam-base) 0 45%, var(--beam-hi) 50%, var(--beam-base) 55% 100%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  animation: beam 7s ease-in-out 1.5s infinite;
+}
+.hero h1 span, .why-us-heading h2 span { --beam-base: var(--aqua); --beam-hi: #fff; }
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .hero h1 span, .services-heading h2 span, .gallery-heading h2 span,
+  .why-us-heading h2 span, .budget-info h2 span, .process-heading h2 span, .faq-heading h2 span {
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+.services-heading h2 span { animation-delay: .4s; }
+.gallery-heading h2 span  { animation-delay: 2.2s; }
+.why-us-heading h2 span   { animation-delay: 3.4s; }
+.budget-info h2 span      { animation-delay: 1.1s; }
+
+@keyframes beam {
+  0%   { background-position: 100% 0; }
+  45%, 100% { background-position: 0% 0; }
+}
+
+/* ===== Acabamento profissional ===== */
+.nav { gap: 26px; }
+.nav a.active { color: var(--aqua); }
+.nav a.active::after { width: 100%; }
+@media (max-width: 768px) { .nav a.active { color: var(--aqua); } }
+
+/* Imagem que não carregar não mostra texto alternativo quebrado */
+img { font-size: 0; color: transparent; }
+.service-image, .hero-image { background: var(--ink); }
+
+
+/* ===== Dúvidas frequentes: movimento ===== */
+.faq-list details { position: relative; border-radius: 10px; transition: background-color .3s, box-shadow .3s; }
+.faq-list details, .faq-list details:first-child { border-top: 0; }
+.faq-list details::before {
+  content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 3px;
+  background: var(--brass); transform: scaleY(0); transform-origin: top; transition: transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.faq-list details:hover::before { transform: scaleY(.4); }
+.faq-list details[open]::before { transform: scaleY(1); }
+.faq-list details[open] { background: #fff; box-shadow: 0 14px 34px rgba(7,30,41,.08); }
+.faq-list summary { padding-inline: 26px 18px; transition: color .2s, padding-left .3s; }
+.faq-list summary:hover { padding-left: 32px; }
+.faq-list details p { padding-left: 26px; }
+
+/* Abre e fecha com altura animada nos navegadores que suportam */
+@supports (interpolate-size: allow-keywords) {
+  .faq-list { interpolate-size: allow-keywords; }
+  .faq-list details::details-content { height: 0; overflow: clip; transition: height .4s cubic-bezier(.2,.7,.2,1), content-visibility .4s allow-discrete; }
+  .faq-list details[open]::details-content { height: auto; }
+}
+
+/* Entrada em sequência ao rolar */
+.js .faq-list details:not(.in) { opacity: 0; }
+.js .faq-list details.in { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+.js .faq-list details:nth-child(2).in { animation-delay: .08s; }
+.js .faq-list details:nth-child(3).in { animation-delay: .16s; }
+.js .faq-list details:nth-child(4).in { animation-delay: .24s; }
+
+/* ===== Galeria: cards entram a cada filtro (sem depender do scroll) ===== */
+.gallery-card { animation: rise .55s cubic-bezier(.2,.7,.2,1) backwards; }
+.gallery-card:nth-child(2) { animation-delay: .07s; }
+.gallery-card:nth-child(3) { animation-delay: .14s; }
+.gallery-card:nth-child(4) { animation-delay: .21s; }
+.gallery-card:nth-child(5) { animation-delay: .28s; }
+.gallery-card:nth-child(6) { animation-delay: .35s; }
+
+/* ===== Formulário: tudo dentro de uma caixa ===== */
+.budget-container {
+  position: relative; overflow: hidden; gap: 64px; padding: 64px;
+  border-radius: 24px; border: 1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(55% 70% at 0% 0%, rgba(92,208,227,.2), transparent 70%),
+    radial-gradient(45% 55% at 100% 100%, rgba(201,151,91,.16), transparent 70%), var(--ink);
+  box-shadow: 0 30px 80px rgba(7,30,41,.3), 0 4px 14px rgba(7,30,41,.12);
+}
+.budget-info h2 { color: #fff; }
+.budget-info h2 span { --beam-base: var(--aqua); --beam-hi: #fff; }
+.budget-info .section-tag { color: var(--brass); }
+.budget-info > p { color: rgba(255,255,255,.76); }
+.budget-contact strong { color: #fff; }
+.budget-contact span { color: rgba(255,255,255,.7); }
+.budget-card { background: #fff; border-color: transparent; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+
+@media (max-width: 900px) { .budget-container { padding: 40px 28px; gap: 40px; } }
+@media (max-width: 550px) {
+  .budget-form { padding-inline: 14px; }
+  .budget-container { padding: 28px 16px; border-radius: 18px; }
+}
+
+/* ===== Cabeçalho ===== */
+.header { z-index: 100; background: rgba(4, 20, 28, .82); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid rgba(92, 208, 227, .16); }
+.header-container { height: 78px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; }
+.logo-text { display: flex; flex-direction: column; line-height: 1; }
+.logo-text strong { color: #fff; font-size: 30px; font-weight: 800; letter-spacing: .02em; }
+.logo-text small { margin-top: 5px; color: var(--aqua); font-size: 10px; font-weight: 600; letter-spacing: .38em; }
+.header-button { border-radius: 999px; padding: 12px 22px; }
+
+/* ===== Responsividade geral ===== */
+html, body { overflow-x: clip; }
+h1, h2, h3, p { overflow-wrap: break-word; }
+.services-heading h2, .gallery-heading h2, .why-us-heading h2, .budget-info h2 { font-size: clamp(28px, 4.2vw, 44px); }
+@media (max-width: 1100px) { .nav { gap: 18px; } .header-button { padding: 12px 18px; } }
+@media (min-width: 769px) and (max-width: 960px) {
+  .header-button { display: none; }
+  .nav { gap: 16px; }
+  .nav a { font-size: 13px; }
+}
+@media (max-width: 768px) {
+  .header-container { height: 68px; padding: 0 18px; }
+  .logo-text strong { font-size: 25px; }
+}
+@media (max-width: 550px) {
+  .services, .gallery, .why-us, .process, .faq { padding-inline: 18px; }
+}
+
+/* ===== Tema premium: azul-marinho contínuo, vidro e latão ===== */
+::selection { background: var(--aqua); color: var(--ink-deep); }
+.header-button svg, .hero-button svg { flex-shrink: 0; }
+
+.services, .gallery, .process, .faq, .budget-form { border-top: 1px solid rgba(92, 208, 227, .1); }
+.services, .process, .budget-form { background: var(--ink-deep); }
+.gallery, .faq { background: var(--ink); }
+
+.section-tag { display: inline-flex; align-items: center; gap: 12px; color: var(--brass); }
+.section-tag::before { content: ""; width: 34px; height: 1px; background: var(--brass); }
+
+.services h2, .services h3, .gallery h2, .gallery h3, .process h2, .process h3, .faq h2 { color: #fff; }
+.services p, .gallery p, .process p { color: rgba(255, 255, 255, .72); }
+
+/* Serviços */
+.service-card { background: rgba(255, 255, 255, .04); border-color: rgba(255, 255, 255, .1); box-shadow: none; }
+.service-card:hover { border-color: rgba(92, 208, 227, .5); box-shadow: 0 22px 50px rgba(0, 0, 0, .4); }
+.service-link { color: var(--aqua); }
+.services-bottom { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); border-radius: 14px; }
+
+/* Galeria */
+.gallery-filters button { background: transparent; color: #d5e2e7; border: 1px solid rgba(255, 255, 255, .22); }
+.gallery-filters button:hover { border-color: var(--aqua); color: #fff; }
+.gallery-filters button.active { background: var(--aqua); color: var(--ink-deep); border-color: var(--aqua); box-shadow: none; }
+.gallery-card { border: 1px solid rgba(255, 255, 255, .08); }
+
+/* Como funciona */
+.process-list li::before { background: var(--ink-deep); }
+
+/* Dúvidas */
+.faq-list details { border-bottom-color: rgba(255, 255, 255, .12); }
+.faq-list summary { color: #fff; }
+.faq-list summary:hover { color: var(--aqua); }
+.faq-list details[open] { background: rgba(255, 255, 255, .05); box-shadow: 0 14px 34px rgba(0, 0, 0, .25); }
+.faq-list details p { color: rgba(255, 255, 255, .74); }
+
+/* Formulário e rodapé: caixa se destaca do fundo mais escuro */
+.budget-container { border-color: rgba(92, 208, 227, .22); }
+.floating-whatsapp { color: #fff; }
+
+/* ===== "Não encontrou o que procura?" ajustado ao conteúdo ===== */
+.services-bottom {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 16px 32px; width: fit-content; max-width: 100%;
+  margin-inline: auto; padding: 22px 34px; text-align: left;
+}
+@media (max-width: 550px) { .services-bottom { flex-direction: column; text-align: center; padding: 22px 20px; } }
+
+/* ===== Formulário ===== */
+.budget-card {
+  background: #e3edf1; border: 1px solid #c7d8df; border-top: 3px solid var(--brass);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 24px 60px rgba(0, 0, 0, .38);
+}
+.budget-card input, .budget-card select, .budget-card textarea {
+  background: #fff; color: var(--ink); border: 1px solid #7f98a3; border-radius: 8px;
+  transition: border-color .15s, background-color .15s;
+}
+.budget-card input::placeholder, .budget-card textarea::placeholder { color: #6c828c; }
+.budget-card input:hover, .budget-card select:hover, .budget-card textarea:hover { border-color: #4f6a76; }
+
+/* Foco discreto: sem brilho e com borda fina, só mais escura */
+.budget-card input:focus, .budget-card select:focus, .budget-card textarea:focus,
+.budget-card input:focus-visible, .budget-card select:focus-visible, .budget-card textarea:focus-visible {
+  outline: none; box-shadow: none; border: 1px solid var(--ink); background: #fff;
+}
+
+/* Como funciona: entrada própria (não depende de classe aplicada por scroll) */
+.process-list li { animation: rise .6s cubic-bezier(.2,.7,.2,1) backwards; }
+.process-list li:nth-child(2) { animation-delay: .1s; }
+.process-list li:nth-child(3) { animation-delay: .2s; }
+.process-list li:nth-child(4) { animation-delay: .3s; }

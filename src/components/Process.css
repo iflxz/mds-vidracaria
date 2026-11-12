@@ -1,0 +1,49 @@
+.process { background: var(--ink-deep); padding: 100px 24px; }
+.process-container { max-width: 1200px; margin: 0 auto; }
+.process-heading { max-width: 680px; margin-bottom: 56px; }
+.process-heading h2 { color: #fff; font-size: clamp(32px, 4vw, 44px); line-height: 1.2; margin: 18px 0; }
+
+.process-list { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; position: relative; }
+
+/* Trilho tracejado e preenchimento que acompanha a etapa escolhida */
+.process-list::before, .process-list::after { content: ""; position: absolute; top: 22px; left: 22px; }
+.process-list::before { width: calc(75% + 24px); border-top: 1px dashed rgba(201, 151, 91, .55); }
+.process-list::after {
+  width: calc((75% + 24px) * var(--progress, 0)); border-top: 2px solid var(--brass);
+  margin-top: -1px; transition: width .55s cubic-bezier(.2, .7, .2, 1);
+}
+
+.process-list li { position: relative; cursor: pointer; }
+
+.step-dot {
+  position: relative; z-index: 1; display: grid; place-items: center;
+  width: 44px; height: 44px; margin-bottom: 22px; border-radius: 50%;
+  border: 1px solid var(--brass); background: var(--ink-deep); color: var(--brass);
+  font: 800 16px var(--font); cursor: pointer;
+  transition: background-color .3s, color .3s, transform .3s, box-shadow .3s;
+}
+.step-dot:hover { transform: scale(1.08); }
+.is-done .step-dot, .is-active .step-dot { background: var(--brass); color: var(--ink-deep); }
+.is-active .step-dot { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(201, 151, 91, .22); }
+
+.process-list h3 {
+  width: fit-content; padding-bottom: 6px; margin-bottom: 8px; font-size: 18px;
+  background: linear-gradient(var(--brass), var(--brass)) 0 100% / 0 2px no-repeat;
+  transition: opacity .35s, background-size .4s cubic-bezier(.2, .7, .2, 1);
+}
+.process-list p { max-width: 260px; font-size: 14px; line-height: 1.7; transition: opacity .35s; }
+
+/* Etapa escolhida em destaque; as demais ficam em segundo plano */
+.process-list li:not(.is-active) h3 { opacity: .72; }
+.process-list li:not(.is-active) p { opacity: .62; }
+.process-list li:not(.is-active):hover h3, .process-list li:not(.is-active):hover p { opacity: 1; }
+.process-list li.is-active h3 { background-size: 100% 2px; }
+
+@media (max-width: 850px) {
+  .process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .process-list::before, .process-list::after { display: none; }
+}
+@media (max-width: 550px) {
+  .process { padding: 75px 20px; }
+  .process-list { grid-template-columns: 1fr; }
+}

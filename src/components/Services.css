@@ -1,0 +1,155 @@
+
+.services {
+  background: var(--mist);
+  padding: 100px 24px;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  max-width: 650px;
+  margin-bottom: 50px;
+}
+
+.section-tag {
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.services-heading h2 {
+  color: var(--ink);
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.2;
+  margin: 18px 0;
+}
+
+.services-heading h2 span {
+  color: var(--brand);
+}
+
+.services-heading p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e5ecef;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(9, 43, 56, 0.12);
+}
+
+.service-image {
+  height: 230px;
+  overflow: hidden;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.06);
+}
+
+.service-content {
+  padding: 24px 20px;
+}
+
+.service-content h3 {
+  color: var(--ink);
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+
+.service-content p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  min-height: 70px;
+  margin-bottom: 20px;
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.3s;
+}
+
+.service-link:hover {
+  gap: 13px;
+}
+
+.services-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 45px;
+  flex-wrap: wrap;
+}
+
+.services-bottom p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.services-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .services {
+    padding: 75px 20px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-image {
+    height: 250px;
+  }
+
+  .services-bottom {
+    flex-direction: column;
+  }
+}
