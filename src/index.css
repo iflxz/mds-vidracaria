@@ -75,3 +75,29 @@ body {
   background-color: var(--ink-deep);
   overscroll-behavior-y: none;
 }
+
+
+/* Scrollbar personalizada - MDS Vidraçaria */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--aqua) var(--ink-deep);
+}
+
+/* Chrome, Edge e Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--aqua);
+  border: 2px solid var(--ink-deep);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brass);
+}
